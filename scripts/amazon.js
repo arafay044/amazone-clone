@@ -1,4 +1,7 @@
-
+import {cart} from '../data/cart.js';//import from cart.js and give file path .. to go outside the folder and then in data folder
+// put all import on top of file
+// module work with live server
+// cart is renamed with myCart {casr as myCart}
 let productsHTML = '';
 
 products.forEach((product) => {
