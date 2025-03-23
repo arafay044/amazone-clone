@@ -1,4 +1,4 @@
-import { cart, removeFormCart } from "../data/cart.js"; //named export is what that have curly brackets
+import { cart, removeFormCart, updateDeliveryOption} from "../data/cart.js"; //named export is what that have curly brackets
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utlis/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
@@ -98,7 +98,7 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
         : `$${formatCurrency(deliveryOpt.priceCents)} -`;
     const isChecked = deliveryOpt.id === cartItem.deliveryOptionId;
     html += `
-        <div class="delivery-option">
+        <div class="delivery-option js-delivery-option" data-product-id="${matchingProduct.id}" data-delivery-option-id="${deliveryOpt.id}">
             <input type="radio" ${isChecked ? "checked" : ""}
             class="delivery-option-input"
             name="delivery-option-${matchingProduct.id}">
@@ -129,3 +129,12 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
     container.remove();
   });
 });
+
+
+document.querySelectorAll('.js-delivery-option')
+    .forEach((element) => {
+        element.addEventListener('click',()=>{
+            const {productId, deliveryOptionId} = element.dataset;
+            updateDeliveryOption(productId,deliveryOptionId);
+        });
+    });
