@@ -1,9 +1,9 @@
 import { cart, removeFormCart, updateDeliveryOption} from "../../data/cart.js"; //named export is what that have curly brackets
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utlis/money.js";
 import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js"; //default export(no curly brackets) | import one thing
-import { deliveryOption } from "../../data/deliveryOption.js";
+import { deliveryOption ,getDeliveryOption} from "../../data/deliveryOption.js";
 
 hello();
 const today = dayjs();
@@ -15,24 +15,12 @@ export function renderOrerSummary(){
     cart.forEach((cartItem) => {
     const productId = cartItem.productId;
 
-    let matchingProduct;
-    products.forEach((product) => {
-        if (product.id === productId) {
-        matchingProduct = product;
-        }
-    });
+    const matchingProduct = getProduct(productId);
 
     const deliveryOptionId = cartItem.deliveryOptionId;
-    let deliveryOpt = deliveryOption.find(
-        (option) => option.id === deliveryOptionId
-    );
 
-    if (!deliveryOpt) {
-        console.error(
-        `No matching delivery option found for ID: ${deliveryOptionId}`
-        );
-        return; // Skip this cart item if no valid delivery option is found
-    }
+    const deliveryOpt = getDeliveryOption(deliveryOptionId);
+
 
     const today = dayjs();
     const deliveryDate = today.add(deliveryOpt.deliveryDays, "days");
