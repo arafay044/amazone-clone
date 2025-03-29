@@ -8,7 +8,7 @@ export function getProduct(productId){
   });
   return matchingProduct;
 }
-
+// this point to external object
 class Product{
   id;
   image;
@@ -52,7 +52,31 @@ class Clothing extends Product { //we can inherit class using extent and parent 
     `;
   }
 }
+/*
+// Built in classes
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());//this method give current time
+------------------------------------------
+console.log(this);
+const obj2 = {
+  a : 2,
+  b : this.a //here obj2 has not been created yet so this is undefined here
+}
 
+ function func1(){
+  console.log(this); //here this is also undefined bcz we are not inside any object
+ }
+ func1();
+ func1.call('hello'); //.call runs the function func1 and we can set the value of this
+
+ const obj3 = {
+  method : () => {
+    console.log(this); //arrow function do not change the value of this => undefined | it points to object not to function
+  }
+ }
+ obj3.method();
+  */
 
 export const products = [
   {
