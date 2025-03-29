@@ -1,16 +1,17 @@
 // Class: Organize code into objects and class help to organize code
 // Object are instances of class
 class Cart{//naming is PascalCase for things that generate objects
-    cartItems;
-    localStorageKey;
+
+    cartItems; // public property 
+    #localStorageKey; //we use # to mark private properties in class | put # before the property name where we access it
 
     constructor(localStoragekey) {
-        this.localStorageKey = localStoragekey;
-        this.loadFromStorage();
+        this.#localStorageKey = localStoragekey;
+        this.#loadFromStorage();
     }
 
-    loadFromStorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+    #loadFromStorage() { // here now the method is also private
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
     
         if (!this.cartItems) {
           this.cartItems = [
@@ -29,7 +30,7 @@ class Cart{//naming is PascalCase for things that generate objects
       }
 
       saveToStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
       }
 
       addToCart(productId) {
@@ -79,7 +80,6 @@ class Cart{//naming is PascalCase for things that generate objects
 
 const cart = new Cart('cart-oop');
 const bussinessCart = new Cart('cart-bussiness');
-
 
 
 console.log(cart);
