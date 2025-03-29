@@ -1,6 +1,7 @@
 // OOP: Group all the data and functions togeather into object
 // Function inside an object is method
 
+//here we use function to generate objects
 function Cart(localStorageKey){
     const cart = {
         cartItems: undefined,
