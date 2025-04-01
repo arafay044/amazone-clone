@@ -1,10 +1,18 @@
 import { renderOrerSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../data/cart.js";
+import { loadProducts } from "../../data/products.js";  
 
 describe("test suite: RenderOrderSummary", () => {
 
     const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
+    // run this code before all of our tests 
+    beforeAll((done) => {
+      //done is parameter will not go next step and wait only go to next when we call done -> by jasmine
+      loadProducts(() => {
+        done();
+      });
+    });
 
     // BeforeEach Hook: run this code before each of our tests | afterEach() => run code after each test
     beforeEach(() => {
