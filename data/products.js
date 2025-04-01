@@ -78,6 +78,26 @@ const obj2 = {
  obj3.method();
   */
 
+export let products = [];
+export function loadProducts(func){
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load',() => {
+  products = JSON.parse(xhr.response).map((productDetails) => {
+    if(productDetails.type === 'clothing'){
+      return new Clothing(productDetails);//map create a new array and return a new object 
+    }
+    return new Product(productDetails);//map create a new array and return a new object 
+  });
+  console.log('Load Products');
+  func();
+  });
+  xhr.open('GET','https://supersimplebackend.dev/products');
+  xhr.send();
+}
+
+
+
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -743,3 +763,4 @@ export const products = [
   }
   return new Product(productDetails);//map create a new array and return a new object 
 });
+*/

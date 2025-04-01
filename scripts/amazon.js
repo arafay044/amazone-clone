@@ -3,9 +3,14 @@ import {cart, addToCart} from "../data/cart.js"; //import from cart.js and give 
 // module work with live server
 // cart is renamed with myCart {cart as myCart}
 
-import { products } from "../data/products.js";
+import { products , loadProducts} from "../data/products.js";
 
 import { formatCurrency } from "./utlis/money.js";
+loadProducts(renderProductsGrid);
+
+function renderProductsGrid(){
+
+
 
 let productsHTML = "";
 
@@ -87,3 +92,4 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     updateCartQuantity();
   });
 });
+}
