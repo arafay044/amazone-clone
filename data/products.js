@@ -78,6 +78,28 @@ const obj2 = {
  obj3.method();
   */
 
+//  Fetch: Fetch API is used to make HTTP requests in the browser. It is a promise-based API, which means it returns a promise that resolves to the response of the request.
+export function loadProductsFethch(){
+  //by default fetxch make a get request 
+  const promise = fetch('https://supersimplebackend.dev/products').then((response)=>{
+    console.log(response);
+   return response.json();//this give data attached to response  | it is also asynchronous so return 
+  }).then((productsData)=>{
+    products = productsData.map((productDetails) => {
+      if(productDetails.type === 'clothing'){
+        return new Clothing(productDetails);//map create a new array and return a new object 
+      }
+      return new Product(productDetails);//map create a new array and return a new object 
+    });
+    console.log('Load Products');
+  });
+  return promise;
+}
+
+// loadProductsFethch().then(()=>{
+//     console.log('next step');
+// });
+
 export let products = [];
 export function loadProducts(func){
   const xhr = new XMLHttpRequest();

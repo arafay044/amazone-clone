@@ -1,6 +1,6 @@
 import { renderOrerSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../data/cart.js";
-import { loadProducts } from "../../data/products.js";  
+import { loadProducts ,loadProductsFethch} from "../../data/products.js";  
 
 describe("test suite: RenderOrderSummary", () => {
 
@@ -9,7 +9,7 @@ describe("test suite: RenderOrderSummary", () => {
     // run this code before all of our tests 
     beforeAll((done) => {
       //done is parameter will not go next step and wait only go to next when we call done -> by jasmine
-      loadProducts(() => {
+      loadProductsFethch().then(()=>{
         done();
       });
     });

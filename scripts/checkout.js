@@ -2,7 +2,7 @@ import { renderOrerSummary} from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // import '../data/cart-class.js';
 // import '../data/backend-practice.js';
-import { loadProducts } from "../data/products.js";   
+import { loadProducts,loadProductsFethch } from "../data/products.js";   
 import { loadCart } from "../data/cart.js";
 
 // PRMOISES: better way to handel asynchronous code (jo wait nai karta complete honay ka)
@@ -13,6 +13,23 @@ import { loadCart } from "../data/cart.js";
 
 // inner function have resolve parameter just like done in jasmine tell when to go next 
 
+
+Promise.all([
+    loadProductsFethch(),
+    new Promise((resolve)=>{
+        loadCart(()=>{
+            resolve();
+        })
+    })
+]).then((values)=>{
+    console.log(values);
+    renderOrerSummary();
+    renderPaymentSummary();
+})
+
+
+
+/*
 
 // We can run mulitple promises at same time and wait for all of them to finish 
 Promise.all([//takes an array of promises
@@ -32,6 +49,8 @@ Promise.all([//takes an array of promises
     renderOrerSummary();
     renderPaymentSummary();
 });
+
+*/
 
 /*
 new Promise((resolve) => {
