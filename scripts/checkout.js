@@ -17,14 +17,21 @@ import { loadCart } from "../data/cart.js";
 // async = make a function return a promise
 // await = wait for a promise to finish before going to next line of code (can only used inside async cannot in normal function)
 async function loadPage(){
-   
+   try{
+    // throw 'error1';//manually create error
     await loadProductsFethch();//can only use await when we are in async function
 
-   const value = await new Promise((resolve)=>{
-        loadCart(()=>{
-            resolve('value2');
-        });
-    });
+    const value = await new Promise((resolve,reject)=>{//reject allow to create error in future
+        // throw 'error2';
+         loadCart(()=>{
+            // reject('error3');
+             resolve('value2');
+         });
+     });
+   } catch(error){
+    console.log('error, please try again later');
+   }
+   
     renderOrerSummary();
     renderPaymentSummary();
 

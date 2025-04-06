@@ -92,6 +92,8 @@ export function loadProductsFethch(){
       return new Product(productDetails);//map create a new array and return a new object 
     });
     console.log('Load Products');
+  }).catch(()=>{
+    console.log('Error!, Please try again later');
   });
   return promise;
 }
@@ -113,10 +115,12 @@ export function loadProducts(func){
   console.log('Load Products');
   func();
   });
+  xhr.addEventListener('error', (error) => {
+    console.log('unexpected error. Please try again later');
+  });
   xhr.open('GET','https://supersimplebackend.dev/products');
   xhr.send();
 }
-
 
 
 /*
