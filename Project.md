@@ -11,5 +11,12 @@
 
 # Benifits
 - **Avoid naming conflicts**
-- ****
+
+
+# How to initialize Git
+1. **Create a new repository on GitHub**
+2. **Initialize a new Git repository**
+- Open terminal
+- git config user.name "Abdul Rafay"
+- git config user.email "rafayabdu@gmail.com"
 
