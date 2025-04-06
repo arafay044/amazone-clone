@@ -14,6 +14,24 @@ import { loadCart } from "../data/cart.js";
 // inner function have resolve parameter just like done in jasmine tell when to go next 
 
 
+// async = make a function return a promise
+// await = wait for a promise to finish before going to next line of code (can only used inside async cannot in normal function)
+async function loadPage(){
+   
+    await loadProductsFethch();//can only use await when we are in async function
+
+   const value = await new Promise((resolve)=>{
+        loadCart(()=>{
+            resolve('value2');
+        });
+    });
+    renderOrerSummary();
+    renderPaymentSummary();
+
+    // return 'value2';//converted in resolve value2
+}
+loadPage();
+/*
 Promise.all([
     loadProductsFethch(),
     new Promise((resolve)=>{
@@ -26,7 +44,7 @@ Promise.all([
     renderOrerSummary();
     renderPaymentSummary();
 })
-
+*/
 
 
 /*
