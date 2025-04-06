@@ -2,6 +2,7 @@ import {cart} from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import { getDeliveryOption } from '../../data/deliveryOption.js';
 import {formatCurrency} from '../utlis/money.js';
+import { addOrder } from '../../data/orders.js';
 
 export function renderPaymentSummary(){
     let productPriceCents = 0;
@@ -47,12 +48,34 @@ export function renderPaymentSummary(){
             <div class="payment-summary-money">$${formatCurrency(totalCents)}</div>
           </div>
 
-          <button class="place-order-button button-primary">
+          <button class="place-order-button button-primary js-place-order">
             Place your order
           </button>
     `;
 
     document.querySelector('.js-payment-summary')
         .innerHTML = paymentSummaryHTML;
+    document.querySelector('.js-place-order').addEventListener('click',async () => {
+      // we use post to send the order to the server and thats why we have second parameter object
+      try{
+        const response = await fetch('https://supersimplebackend.dev/orders',{
+          method: 'POST',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            cart: cart
+          })
+        });
+          //resposne.json is also a promise
+       const order = await response.json();
+       addOrder(order);
+      }catch(error){
+        console.error('Unexpected error, try again later');
+      }
+
+      // special obj that let us control url at top of browser if change location obj it change url
+      window.location.href = 'orders.html';// replace after / with orders.html
     
+    });
 }
