@@ -18,13 +18,15 @@ export function renderPaymentSummary(){
 
     const totalCents = totalBeforeTaxCents + taxCents;
 
+    
+
     const paymentSummaryHTML =  `
         <div class="payment-summary-title">
             Order Summary
           </div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${cart.length}):</div>
             <div class="payment-summary-money">$${formatCurrency(productPriceCents)}</div>
           </div>
 
@@ -55,6 +57,8 @@ export function renderPaymentSummary(){
 
     document.querySelector('.js-payment-summary')
         .innerHTML = paymentSummaryHTML;
+         const itemsNumber = document.querySelector('.js-number-of-items');
+     itemsNumber.textContent = cart.length + " items";
     document.querySelector('.js-place-order').addEventListener('click',async () => {
       // we use post to send the order to the server and thats why we have second parameter object
       try{
@@ -79,3 +83,5 @@ export function renderPaymentSummary(){
     
     });
 }
+
+
